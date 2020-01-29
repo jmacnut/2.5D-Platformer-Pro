@@ -1,2 +1,2 @@
 # 2.5D-Platformer-Pro
-GameDevHQ Course 1B
+Course 1B: Code-centric 2.5D Platformer
