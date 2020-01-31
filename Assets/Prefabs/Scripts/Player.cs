@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -14,7 +15,7 @@ public class Player : MonoBehaviour
    private float _gravity = 1.0f;   // real world = -9.81f
 
    [SerializeField]
-   private float _jumpHeight = 20.0f;
+   private float _jumpHeight = 35.0f;
 
    [SerializeField]
    private float _yVelocity;   // cached velocity
@@ -25,6 +26,11 @@ public class Player : MonoBehaviour
    private int _coinCount;   // collectable count
 
    private UIManager _uiManager;
+
+   [SerializeField]
+   private int _lives = 3;
+
+   private Vector3 _originalPosition;
 
 
    void Start()
@@ -37,10 +43,14 @@ public class Player : MonoBehaviour
          Debug.LogError("The UI Manager is NULL");
       }
 
+      _uiManager.UpdateLives(_lives);
+
+      _originalPosition = gameObject.transform.position;
    }
 
    void Update()
    {
+
       // get horizontal input
       float horizontalInput = Input.GetAxis("Horizontal");
 
@@ -87,12 +97,24 @@ public class Player : MonoBehaviour
       _characterController.Move(velocity * Time.deltaTime);
 
    }
-   
+
    public void CollectCoin()
    {
       _coinCount++;
 
       _uiManager.UpdateCoinCount(_coinCount);
+   }
+
+   public void Damage()
+   {
+      _lives--;
+      _uiManager.UpdateLives(_lives);
+
+      if (_lives < 1)
+      {
+         // player death
+         SceneManager.LoadScene(0);
+      }
    }
 
 }

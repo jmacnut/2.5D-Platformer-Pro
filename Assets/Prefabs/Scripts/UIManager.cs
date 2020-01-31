@@ -11,8 +11,17 @@ public class UIManager : MonoBehaviour
    [SerializeField]
    private Text _coinCountText;
 
+   [SerializeField]
+   private Text _livesText;
+
+
    public void UpdateCoinCount(int coinCount)
    {
-      _coinCountText.text = "Coins: " + coinCount;
+      _coinCountText.text = "Coins: " + coinCount.ToString();
+   }
+
+   public void UpdateLives(int lives)
+   {
+      _livesText.text = "Lives: " + lives.ToString();
    }
 }

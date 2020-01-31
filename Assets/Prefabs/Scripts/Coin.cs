@@ -13,7 +13,7 @@ public class Coin : MonoBehaviour
          // give the player a coin
          Player player = other.GetComponent<Player>();
 
-         if(player != null)
+         if (player != null)
          {
             // collect coin
             player.CollectCoin();
